@@ -11,4 +11,4 @@ Features:
 * Certification paths
 * Mobile-ready architecture
 
-This immediately makes the repo look like a real software project instead of a collection of code files.
+
