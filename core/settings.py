@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'progression',
     'quests',
     'games',
+    'achievements',
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,6 @@
 from quests.models import Question, UserAnswer
 from progression.services import add_xp, update_daily_streak
+from achievements.services import award_first_response
 
 def submit_answer(user, question_id, answer):
     """
@@ -34,6 +35,7 @@ def submit_answer(user, question_id, answer):
         xp_gained = question.xp_reward
         add_xp(user, xp_gained)
         update_daily_streak(user)
+        award_first_response(user)
 
     return {
         "correct": is_correct,
