@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'users',
     'progression',
-    'quests'
+    'quests',
+    'games',
 ]
 
 MIDDLEWARE = [
