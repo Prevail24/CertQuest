@@ -126,3 +126,37 @@ body {
     background: #38f2af;
     border-radius: 999px;
 }
+
+.eyebrow {
+    color: #38f2af;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.hero-text {
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 760px;
+    margin: 20px auto;
+}
+
+.hero-actions {
+    margin-top: 30px;
+}
+
+.secondary-button {
+    display: inline-block;
+    color: #38f2af;
+    border: 1px solid #38f2af;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 12px;
+}
+
+.secondary-button:hover {
+    background: rgba(56, 242, 175, 0.1);
+}

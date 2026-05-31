@@ -1,11 +1,81 @@
 {% extends "base.html" %}
 
-{% block title %}CertQuest | Home{% endblock %}
+{% block title %}CertQuest | Learn Cybersecurity Like a Game{% endblock %}
 
 {% block content %}
+
 <section class="hero-card">
-    <h1>Welcome to CertQuest</h1>
-    <p>Your certification journey begins here.</p>
-    <a class="primary-button" href="/accounts/login/">Enter the Quest</a>
+    <p class="eyebrow">Cybersecurity Training Reimagined</p>
+
+    <h1>Turn certification studying into a daily cyber mission.</h1>
+
+    <p class="hero-text">
+        CertQuest helps learners build IT, networking, and cybersecurity skills
+        through realistic cyber scenarios, daily quests, XP, streaks, and
+        achievement-based progression.
+    </p>
+
+    <div class="hero-actions">
+        {% if user.is_authenticated %}
+            <a href="/dashboard/" class="primary-button">Go to Dashboard</a>
+        {% else %}
+            <a href="/accounts/login/" class="primary-button">Start Your Quest</a>
+        {% endif %}
+
+            <a href="/games/" class="secondary-button">View Game Modes</a>
+    </div>
 </section>
+
+<section class="dashboard-grid">
+
+    <div class="card">
+        <h2>⚔️ Daily Cyber Missions</h2>
+        <p>
+            Complete short, realistic scenarios based on networking,
+            security operations, incident response, and certification topics.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>📈 XP & Leveling</h2>
+        <p>
+            Earn XP, level up, build streaks, and track your growth as you
+            move from beginner to cyber defender.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🏅 Achievements</h2>
+        <p>
+            Unlock badges as you complete challenges, master topics,
+            and progress through certification paths.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🎮 Multiple Game Modes</h2>
+        <p>
+            Train through Daily Quiz, Port Matcher, Subnet Dungeon,
+            Boss Battles, and future interactive cyber games.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🎯 Built for Busy Learners</h2>
+        <p>
+            Study in short sessions that fit into real life while using
+            repetition to strengthen long-term retention.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🛡️ Certification Focused</h2>
+        <p>
+            Designed around paths like Network+, Security+, A+, CCNA,
+            and future IT/cybersecurity certifications.
+        </p>
+    </div>
+
+</section>
+
 {% endblock %}
