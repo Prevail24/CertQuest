@@ -24,3 +24,23 @@ class CertificationPath(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Domain(models.Model):
+    """
+    Represents a certification domain.
+    Example:
+    Security+ -> Threats
+    Network+ -> Routing
+    """
+
+    certification_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.CASCADE
+    )
+
+    name = models.CharField(max_length=100)
+
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.certification_path.name} - {self.name}"
