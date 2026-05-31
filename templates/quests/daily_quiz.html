@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Daily Quiz
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>{{ question.title }}</h1>
+
+    <p class="subtitle">
+        {{ question.scenario }}
+    </p>
+
+    <hr>
+
+    <h3>{{ question.text }}</h3>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <p>
+            <input type="radio" name="answer" value="A" required>
+            {{ question.option_a }}
+        </p>
+
+        <p>
+            <input type="radio" name="answer" value="B">
+            {{ question.option_b }}
+        </p>
+
+        <p>
+            <input type="radio" name="answer" value="C">
+            {{ question.option_c }}
+        </p>
+
+        <p>
+            <input type="radio" name="answer" value="D">
+            {{ question.option_d }}
+        </p>
+
+        <button class="primary-button" type="submit">
+            Submit Answer
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

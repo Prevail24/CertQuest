@@ -1,12 +1,5 @@
-"""
-quests/services.py
-
-Business logic for checking quiz answers and awarding XP.
-"""
-
 from quests.models import Question, UserAnswer
-from progression.services import add_xp
-
+from progression.services import add_xp, update_daily_streak
 
 def submit_answer(user, question_id, answer):
     """
@@ -40,6 +33,7 @@ def submit_answer(user, question_id, answer):
     if is_correct:
         xp_gained = question.xp_reward
         add_xp(user, xp_gained)
+        update_daily_streak(user)
 
     return {
         "correct": is_correct,

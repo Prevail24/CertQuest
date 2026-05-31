@@ -16,8 +16,15 @@
     </div>
 
     <div class="card stat-card">
-        <h2>XP</h2>
-        <p class="stat-number">{{ profile.xp }}</p>
+        <h2>XP Progress</h2>
+
+        <p class="stat-number">
+    {{ profile.xp }} / {{ xp_needed }}
+</p>
+
+<div class="xp-bar">
+    <div class="xp-fill" style="width: {{ xp_percent }}%;"></div>
+</div>
     </div>
 
     <div class="card stat-card">
@@ -28,7 +35,9 @@
     <div class="card quest-card">
         <h2>Daily Quest</h2>
         <p>Complete today’s challenge to earn XP.</p>
-        <button class="primary-button">Start Daily Quest</button>
+        <a href="/games/daily-quiz/" class="primary-button">
+            Start Daily Quest
+        </a>
     </div>
 
 </section>
