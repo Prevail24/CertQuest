@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from learning.models import CertificationPath
 
 
 # User Profile model
@@ -12,6 +13,13 @@ class Profile(models.Model):
     xp = models.IntegerField(default=0)
     streak = models.IntegerField(default=0)
     last_streak_date = models.DateField(null=True, blank=True)
+
+    selected_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+)
     
     created_at = models.DateTimeField(auto_now_add=True)
 

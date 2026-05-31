@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from learning.models import CertificationPath
 
 
 class Quest(models.Model):
@@ -24,6 +25,14 @@ class Question(models.Model):
     """
 
     quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
+    
+    # Certification path this question belongs to
+    certification_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     # Short title shown above the scenario
     title = models.CharField(max_length=255, default="Cyber Scenario")

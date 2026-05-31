@@ -5,9 +5,17 @@
 {% block content %}
 <section class="dashboard-grid">
 
-    <div class="card">
+    <div class="card quest-card">
         <h1>Welcome, {{ request.user.username }}</h1>
-        <p class="subtitle">Your journey continues.</p>
+
+        {% if profile.selected_path %}
+            <p class="subtitle">Active Mission Track</p>
+            <h2>{{ profile.selected_path.name }}</h2>
+            <a href="/choose-path/" class="secondary-button">Change Track</a>
+        {% else %}
+            <p class="subtitle">No active certification track selected.</p>
+            <a href="/choose-path/" class="primary-button">Begin Your Journey</a>
+        {% endif %}
     </div>
 
     <div class="card stat-card">
@@ -17,14 +25,11 @@
 
     <div class="card stat-card">
         <h2>XP Progress</h2>
+        <p class="stat-number">{{ profile.xp }} / {{ xp_needed }}</p>
 
-        <p class="stat-number">
-    {{ profile.xp }} / {{ xp_needed }}
-</p>
-
-<div class="xp-bar">
-    <div class="xp-fill" style="width: {{ xp_percent }}%;"></div>
-</div>
+        <div class="xp-bar">
+            <div class="xp-fill" style="width: {{ xp_percent }}%;"></div>
+        </div>
     </div>
 
     <div class="card stat-card">
@@ -34,11 +39,12 @@
 
     <div class="card quest-card">
         <h2>Daily Quest</h2>
-        <p>Complete today’s challenge to earn XP.</p>
+        <p>Complete today’s cyber mission to earn XP and build your streak.</p>
         <a href="/games/daily-quiz/" class="primary-button">
             Start Daily Quest
         </a>
     </div>
+
     <div class="card quest-card">
         <h2>Achievements</h2>
 
@@ -61,5 +67,6 @@
             <p>No achievements unlocked yet. Complete your first mission.</p>
         {% endif %}
     </div>
+
 </section>
 {% endblock %}

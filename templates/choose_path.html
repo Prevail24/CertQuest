@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}CertQuest | Choose Your Path{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Choose Your Certification Path</h1>
+    <p class="subtitle">
+        Select the certification journey you want CertQuest to personalize for you.
+    </p>
+</section>
+
+<section class="dashboard-grid">
+    {% for path in paths %}
+        <div class="card">
+            <h2>{{ path.name }}</h2>
+            <p>{{ path.description }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="path_id" value="{{ path.id }}">
+                <button class="primary-button" type="submit">
+                    Select Path
+                </button>
+            </form>
+        </div>
+    {% empty %}
+        <div class="card">
+            <p>No certification paths are available yet.</p>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}

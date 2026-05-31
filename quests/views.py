@@ -11,7 +11,16 @@ def daily_quiz(request):
     Displays a random cyber scenario question and processes answers.
     """
 
-    questions = list(Question.objects.all())
+    selected_path = request.user.profile.selected_path
+
+    if selected_path:
+        questions = list(
+            Question.objects.filter(
+                certification_path=selected_path
+            )
+        )
+    else:
+        questions = list(Question.objects.all())
 
     if not questions:
         return render(

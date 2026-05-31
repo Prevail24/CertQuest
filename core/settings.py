@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'quests',
     'games',
     'achievements',
+    'learning',
 ]
 
 MIDDLEWARE = [
