@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CertQuest Dashboard</title>
+</head>
+<body>
+
+<h1>Welcome, {{ request.user.username }}</h1>
+
+<p>Level: {{ profile.level }}</p>
+<p>XP: {{ profile.xp }}</p>
+<p>Streak: {{ profile.streak }}</p>
+
+<hr>
+
+<button>
+    Start Daily Quest
+</button>
+
+</body>
+</html>
