@@ -1,14 +1,35 @@
-CertQuest
+# CertQuest
 
-Gamified IT, Networking, and Cybersecurity certification training platform built with Django.
+CertQuest is a gamified IT, networking, and cybersecurity certification training platform built with Django.
 
-Features:
+## Project Goal
 
-* RPG progression system
-* Daily quests
-* XP and leveling
-* Skill trees
-* Certification paths
-* Mobile-ready architecture
+The goal of CertQuest is to make certification studying more engaging through RPG-style progression, daily quests, XP, levels, and repetition-based learning.
 
+## Planned Features
 
+- User accounts and profiles
+- RPG-style XP and leveling system
+- Daily certification quests
+- Quick quizzes for busy learners
+- Network+, Security+, and other certification paths
+- Skill tree progression
+- Achievement system
+- Mobile-ready backend architecture
+
+## Tech Stack
+
+- Python
+- Django
+- SQLite for development
+- HTML
+- CSS
+- JavaScript
+
+## Current Status
+
+Early development. Core Django project setup is complete.
+
+## Developer
+
+Built by [Prevail24](https://github.com/Prevail24)
