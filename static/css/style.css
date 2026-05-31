@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #f4f7fb;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #111827;
+    border-bottom: 1px solid #243044;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #38f2af;
+}
+
+.navbar a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.navbar a:hover {
+    color: #38f2af;
+}
+
+.page-container {
+    padding: 40px;
+}
+
+.hero-card,
+.card {
+    background: #111827;
+    border: 1px solid #243044;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(56, 242, 175, 0.08);
+}
+
+.hero-card {
+    max-width: 700px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+.hero-card h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #94a3b8;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.dashboard-grid .card:first-child,
+.quest-card {
+    grid-column: span 3;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: bold;
+    color: #38f2af;
+}
+
+.primary-button {
+    display: inline-block;
+    background: #38f2af;
+    color: #06111f;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background: #2dd49b;
+}
+
+@media (max-width: 800px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid .card:first-child,
+    .quest-card {
+        grid-column: span 1;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CertQuest</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}CertQuest | Home{% endblock %}
+
+{% block content %}
+<section class="hero-card">
     <h1>Welcome to CertQuest</h1>
     <p>Your certification journey begins here.</p>
-</body>
-</html>
+    <a class="primary-button" href="/accounts/login/">Enter the Quest</a>
+</section>
+{% endblock %}
