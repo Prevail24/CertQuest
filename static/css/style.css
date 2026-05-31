@@ -160,3 +160,28 @@ body {
 .secondary-button:hover {
     background: rgba(56, 242, 175, 0.1);
 }
+
+.achievement-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #0b1020;
+    border: 1px solid #243044;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.achievement-icon {
+    font-size: 32px;
+}
+
+.achievement-item p {
+    margin: 6px 0 0;
+    color: #94a3b8;
+}
