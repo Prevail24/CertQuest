@@ -15,26 +15,46 @@ class Quest(models.Model):
 
     def __str__(self):
         return self.title
-
-
 class Question(models.Model):
+    """
+    Represents a single multiple-choice cyber scenario question.
+
+    Questions are designed to feel like real-world IT, networking,
+    or cybersecurity situations instead of plain textbook questions.
+    """
+
     quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 
+    # Short title shown above the scenario
+    title = models.CharField(max_length=255, default="Cyber Scenario")
+
+    # Dramatic but realistic scenario text
+    scenario = models.TextField(default="A security event has occurred.")
+
+    # Actual question being asked
     text = models.TextField()
-    correct_answer = models.CharField(max_length=255)
+
+    # Multiple-choice options
+    option_a = models.CharField(max_length=255, default="")
+    option_b = models.CharField(max_length=255, default="")
+    option_c = models.CharField(max_length=255, default="")
+    option_d = models.CharField(max_length=255, default="")
+
+    # Correct answer should be A, B, C, or D
+    correct_answer = models.CharField(max_length=1)
+
+    # Explanation shown after answering
     explanation = models.TextField(blank=True)
 
     xp_reward = models.IntegerField(default=10)
 
     def __str__(self):
-        return self.text[:50]
-
-
+        return self.title
 class UserAnswer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-    answer = models.CharField(max_length=255)
+    answer = models.CharField(max_length=1)
     is_correct = models.BooleanField()
 
     created_at = models.DateTimeField(auto_now_add=True)
