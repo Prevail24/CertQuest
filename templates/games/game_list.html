@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}CertQuest | Games{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>Choose Your Game</h1>
+    <p class="subtitle">Train your skills through different challenge modes.</p>
+</section>
+
+<section class="dashboard-grid">
+    {% for game in games %}
+        <div class="card">
+            <h2>{{ game.name }}</h2>
+            <p>{{ game.description }}</p>
+            <p><strong>XP Reward:</strong> {{ game.xp_reward }}</p>
+            <button class="primary-button">Play</button>
+        </div>
+    {% empty %}
+        <div class="card">
+            <p>No games are available yet.</p>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
