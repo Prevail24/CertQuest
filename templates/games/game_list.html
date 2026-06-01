@@ -9,20 +9,32 @@
 </section>
 
 <section class="dashboard-grid">
+
     {% for game in games %}
         <div class="card">
             <h2>{{ game.name }}</h2>
             <p>{{ game.description }}</p>
             <p><strong>XP Reward:</strong> {{ game.xp_reward }}</p>
-            <a href="/games/daily-quiz/" class="primary-button"
->
-    Play
-</a>
-</div>
+
+            {% if game.slug == "daily-quiz" %}
+                <a href="/games/daily-quiz/" class="primary-button">
+                    Play
+                </a>
+            {% elif game.slug == "incident-response-simulator" %}
+                <a href="/games/scenario/1/step/" class="primary-button">
+                    Launch Scenario
+                </a>
+            {% else %}
+                <button class="primary-button" disabled>
+                    Coming Soon
+                </button>
+            {% endif %}
+        </div>
     {% empty %}
         <div class="card">
             <p>No games are available yet.</p>
         </div>
     {% endfor %}
+
 </section>
 {% endblock %}

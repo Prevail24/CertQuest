@@ -44,13 +44,14 @@ def get_domain_progress(user):
             status = "🟡 Improving"
         else:
             status = "🔴 Needs Review"
-
+        boss_battle_unlocked = percent >= 80
         progress_data.append({
             "domain": domain,
             "total_answers": total_answers,
             "correct_answers": correct_answers,
             "percent": percent,
             "status": status,
+            "boss_battle_unlocked": boss_battle_unlocked,
         })
 
     return progress_data

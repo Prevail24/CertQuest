@@ -90,9 +90,16 @@
 
             <div style="margin-bottom: 20px;">
 
-                <strong>{{ item.domain.name }}</strong>
+                <strong>{{ item.domain.name }}</strong> 
+                {% if item.boss_battle_unlocked %}
+                    <p class="subtitle">👑 Boss Battle Available</p>
+                {% endif %}
+                
+                
                 <p class="subtitle">{{ item.status }}</p>
 
+                
+                
                 <p>
                     {{ item.correct_answers }}
                     /

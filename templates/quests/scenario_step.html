@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}{{ scenario.title }} | Step {{ current_step_number }}{% endblock %}
+
+{% block content %}
+<section class="card">
+    <p class="eyebrow">SOC Incident Simulator</p>
+
+    <h1>🚨 {{ scenario.title }}</h1>
+
+    <p class="subtitle">
+        Step {{ current_step_number }} of {{ total_steps }}
+    </p>
+
+    <div class="xp-bar">
+        <div
+            class="xp-fill"
+            style="width: {% widthratio current_step_number total_steps 100 %}%;">
+        </div>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Decision Required</h2>
+
+    <p>{{ step.question }}</p>
+
+    {% if result %}
+        {% if result.correct %}
+            <h3>✅ Correct Decision</h3>
+        {% else %}
+            <h3>❌ Incorrect Decision</h3>
+            <p>
+                Correct Answer:
+                {{ result.correct_answer }}
+            </p>
+        {% endif %}
+
+        <p class="subtitle">
+            {{ result.explanation }}
+        </p>
+
+        {% if result.correct %}
+            <a
+                href="/games/scenario/{{ scenario.id }}/step/"
+                class="primary-button"
+            >
+                Continue
+            </a>
+        {% endif %}
+
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+
+            <p>
+                <input type="radio" name="answer" value="A" required>
+                A. {{ step.option_a }}
+            </p>
+
+            <p>
+                <input type="radio" name="answer" value="B">
+                B. {{ step.option_b }}
+            </p>
+
+            <p>
+                <input type="radio" name="answer" value="C">
+                C. {{ step.option_c }}
+            </p>
+
+            <p>
+                <input type="radio" name="answer" value="D">
+                D. {{ step.option_d }}
+            </p>
+
+            <button class="primary-button" type="submit">
+                Submit Decision
+            </button>
+        </form>
+    {% endif %}
+</section>
+{% endblock %}

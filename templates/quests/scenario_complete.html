@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Mission Complete{% endblock %}
+
+{% block content %}
+<section class="card">
+    <p class="eyebrow">Mission Complete</p>
+
+    <h1>✅ {{ scenario.title }} Contained</h1>
+
+    <p class="subtitle">
+        You completed the full incident response scenario.
+    </p>
+
+    <p>
+        <strong>XP Reward:</strong>
+        {{ scenario.xp_reward }}
+    </p>
+
+    <a href="/dashboard/" class="primary-button">
+        Return to Dashboard
+    </a>
+</section>
+{% endblock %}

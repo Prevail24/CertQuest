@@ -72,3 +72,49 @@ class UserAnswer(models.Model):
     is_correct = models.BooleanField()
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Scenario(models.Model):
+    """
+    Multi-step cyber scenario.
+    """
+
+    title = models.CharField(max_length=255)
+
+    certification_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.CASCADE
+    )
+
+    description = models.TextField()
+
+    xp_reward = models.IntegerField(default=50)
+
+    def __str__(self):
+        return self.title
+    
+class ScenarioStep(models.Model):
+    """
+    Individual step within a scenario.
+    """
+
+    scenario = models.ForeignKey(
+        Scenario,
+        on_delete=models.CASCADE
+    )
+
+    step_number = models.IntegerField()
+
+    question = models.TextField()
+
+    option_a = models.CharField(max_length=255)
+    option_b = models.CharField(max_length=255)
+    option_c = models.CharField(max_length=255)
+    option_d = models.CharField(max_length=255)
+
+    correct_answer = models.CharField(max_length=1)
+
+    explanation = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.scenario.title} - Step {self.step_number}"
+    

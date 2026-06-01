@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}CertQuest | {{ scenario.title }}{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h1>🚨 {{ scenario.title }}</h1>
+    <p class="subtitle">{{ scenario.description }}</p>
+    <p><strong>XP Reward:</strong> {{ scenario.xp_reward }}</p>
+</section>
+
+<section class="dashboard-grid">
+    {% for step in steps %}
+        <div class="card">
+            <h2>Step {{ step.step_number }}</h2>
+            <p>{{ step.question }}</p>
+
+            <ul>
+                <li>A: {{ step.option_a }}</li>
+                <li>B: {{ step.option_b }}</li>
+                <li>C: {{ step.option_c }}</li>
+                <li>D: {{ step.option_d }}</li>
+            </ul>
+
+            <p><strong>Correct Answer:</strong> {{ step.correct_answer }}</p>
+            <p class="subtitle">{{ step.explanation }}</p>
+        </div>
+    {% empty %}
+        <div class="card">
+            <p>No steps have been created for this scenario yet.</p>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
