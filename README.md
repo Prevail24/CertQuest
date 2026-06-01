@@ -26,7 +26,16 @@ The goal of CertQuest is to make certification studying more engaging through RP
 - CSS
 - JavaScript
 
-## Current Status
+## Current Status ##
+
+# CertQuest TODO
+
+## Bug / Needs Review
+
+- Scenario completion XP may still award more than once.
+- Check `UserScenario` tracking logic.
+- Confirm one completed scenario record exists per user/scenario.
+- Verify replay does not award XP.
 
 Early development. Core Django project setup is complete.
 
