@@ -14,12 +14,11 @@
             <h2>{{ game.name }}</h2>
             <p>{{ game.description }}</p>
             <p><strong>XP Reward:</strong> {{ game.xp_reward }}</p>
-            <a
-    href="/games/daily-quiz/"
-    class="primary-button"
+            <a href="/games/daily-quiz/" class="primary-button"
 >
     Play
 </a>
+</div>
     {% empty %}
         <div class="card">
             <p>No games are available yet.</p>

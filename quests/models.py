@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from learning.models import CertificationPath
+from learning.models import CertificationPath, Domain
 
 
 class Quest(models.Model):
@@ -31,6 +31,11 @@ class Question(models.Model):
         CertificationPath,
         on_delete=models.CASCADE,
         null=True,
+        blank=True
+    )
+
+    domains = models.ManyToManyField(
+        Domain,
         blank=True
     )
 

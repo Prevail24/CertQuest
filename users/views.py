@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from learning.models import CertificationPath
 from achievements.models import UserAchievement
+from learning.services import get_domain_progress
 
 
 @login_required
@@ -23,11 +24,14 @@ def dashboard(request):
         user=request.user
     ).select_related("achievement")
 
+    domain_progress = get_domain_progress(request.user)
+
     context = {
         "profile": profile,
         "xp_needed": xp_needed,
         "xp_percent": xp_percent,
         "user_achievements": user_achievements,
+        "domain_progress": domain_progress,
     }
 
     return render(request, "dashboard.html", context)

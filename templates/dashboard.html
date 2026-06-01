@@ -10,11 +10,22 @@
 
         {% if profile.selected_path %}
             <p class="subtitle">Active Mission Track</p>
-            <h2>{{ profile.selected_path.name }}</h2>
+
+            <h2 style="color: {{ profile.selected_path.primary_color }};">
+                {{ profile.selected_path.icon }} {{ profile.selected_path.name }}
+            </h2>
+
+            <p class="subtitle">
+                Theme: {{ profile.selected_path.theme_name }}
+            </p>
+
             <a href="/choose-path/" class="secondary-button">Change Track</a>
         {% else %}
             <p class="subtitle">No active certification track selected.</p>
-            <a href="/choose-path/" class="primary-button">Begin Your Journey</a>
+
+            <a href="/choose-path/" class="primary-button">
+                Begin Your Journey
+            </a>
         {% endif %}
     </div>
 
@@ -40,6 +51,7 @@
     <div class="card quest-card">
         <h2>Daily Quest</h2>
         <p>Complete today’s cyber mission to earn XP and build your streak.</p>
+
         <a href="/games/daily-quiz/" class="primary-button">
             Start Daily Quest
         </a>
@@ -68,5 +80,47 @@
         {% endif %}
     </div>
 
+    <div class="card quest-card">
+    <h2>Mission Progress</h2>
+
+    {% if domain_progress %}
+    
+
+        {% for item in domain_progress %}
+
+            <div style="margin-bottom: 20px;">
+
+                <strong>{{ item.domain.name }}</strong>
+                <p class="subtitle">{{ item.status }}</p>
+
+                <p>
+                    {{ item.correct_answers }}
+                    /
+                    {{ item.total_answers }}
+                    Correct
+                </p>
+
+                <div class="xp-bar">
+                    <div
+                        class="xp-fill"
+                        style="width: {{ item.percent }}%;">
+                    </div>
+                </div>
+
+                <small>{{ item.percent }}%</small>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            Select a certification path and answer questions
+            to begin tracking progress.
+        </p>
+
+    {% endif %}
+</div>
 </section>
 {% endblock %}
