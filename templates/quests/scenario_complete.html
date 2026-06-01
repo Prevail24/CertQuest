@@ -5,17 +5,23 @@
 {% block content %}
 <section class="card">
     <p class="eyebrow">Mission Complete</p>
-
     <h1>✅ {{ scenario.title }} Contained</h1>
-
     <p class="subtitle">
         You completed the full incident response scenario.
     </p>
-
+    {% if xp_gained > 0 %}
     <p>
-        <strong>XP Reward:</strong>
-        {{ scenario.xp_reward }}
+        <strong>XP Earned:</strong>
+        {{ xp_gained }}
     </p>
+{% else %}
+    <p class="subtitle">
+        Scenario already completed.
+    </p>
+    <p>
+        Replay practice is available, but additional XP is not awarded.
+    </p>
+{% endif %}
 
     <a href="/dashboard/" class="primary-button">
         Return to Dashboard

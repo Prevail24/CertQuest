@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 from random import choice
-
-from .models import Question, Scenario, ScenarioStep
+from progression.services import add_xp
+from .models import Question, Scenario, ScenarioStep, UserScenario
 from .services import submit_answer
 
 
@@ -103,13 +104,31 @@ def scenario_step(request, scenario_id):
     current_index = request.session.get(session_key, 0)
 
     if current_index >= len(steps):
+        user_scenario, created = UserScenario.objects.get_or_create(
+            user=request.user,
+            scenario=scenario
+        )
+
+        xp_gained = 0
+
+        if not user_scenario.completed:
+            add_xp(request.user, scenario.xp_reward)
+
+            user_scenario.completed = True
+            user_scenario.completed_at = timezone.now()
+            user_scenario.save()
+
+            xp_gained = scenario.xp_reward
+
         request.session[session_key] = 0
+        request.session.modified = True
 
         return render(
             request,
             "quests/scenario_complete.html",
             {
                 "scenario": scenario,
+                "xp_gained": xp_gained,
             }
         )
 
@@ -129,6 +148,7 @@ def scenario_step(request, scenario_id):
 
         if is_correct:
             request.session[session_key] = current_index + 1
+            request.session.modified = True
 
     return render(
         request,

@@ -118,3 +118,43 @@ class ScenarioStep(models.Model):
     def __str__(self):
         return f"{self.scenario.title} - Step {self.step_number}"
     
+class UserScenario(models.Model):
+    """
+    Tracks scenario completion for each user.
+
+    This prevents users from earning scenario XP repeatedly
+    from the same scenario while still allowing replay for practice.
+    """
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE)
+
+    completed = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ("user", "scenario")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.scenario.title}"
+    
+class BossBattle(models.Model):
+
+    title = models.CharField(max_length=255)
+
+    domain = models.ForeignKey(
+        Domain,
+        on_delete=models.CASCADE
+    )
+
+    certification_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.CASCADE
+    )
+
+    xp_reward = models.IntegerField(default=250)
+
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title  
