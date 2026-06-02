@@ -26,7 +26,27 @@ The goal of CertQuest is to make certification studying more engaging through RP
 - CSS
 - JavaScript
 
-## Current Status
+## Current Status ##
+
+# CertQuest !!!!!!!! TODO !!!!!!!!!
+
+## Future Feature: Docker Sandbox Labs
+
+- Temporary isolated Docker containers
+- Linux command practice
+- Security+ investigation labs
+- Networking exercises
+- Scenario-based missions
+- XP rewards
+- Automatic container cleanup
+- Possible future premium feature
+
+## Bug / Needs Review
+
+- Scenario completion XP may still award more than once.
+- Check `UserScenario` tracking logic.
+- Confirm one completed scenario record exists per user/scenario.
+- Verify replay does not award XP.
 
 Early development. Core Django project setup is complete.
 
