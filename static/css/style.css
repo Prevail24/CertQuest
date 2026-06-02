@@ -5,6 +5,31 @@ body {
     color: #f4f7fb;
 }
 
+.auth-form {
+    margin-top: 24px;
+    text-align: left;
+}
+
+.auth-form p {
+    margin-bottom: 18px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+    font-weight: bold;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0b1020;
+    color: #f4f7fb;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -30,6 +55,47 @@ body {
     color: #38f2af;
 }
 
+.logout-form {
+    display: inline;
+}
+
+.nav-button {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+.nav-button:hover {
+    color: #38f2af;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link-button {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0;
+}
+
+.nav-link-button:hover {
+    color: #38f2af;
+}
+
 .page-container {
     padding: 40px;
 }
@@ -52,6 +118,11 @@ body {
 .hero-card h1 {
     font-size: 48px;
     margin-bottom: 10px;
+}
+
+.logout-form {
+    display: inline-flex;
+    align-items: center;
 }
 
 .subtitle {

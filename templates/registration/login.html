@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CertQuest Login</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Login to CertQuest</h1>
+{% block title %}CertQuest | Login{% endblock %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% block content %}
+<section class="hero-card">
+    <p class="eyebrow">Access Terminal</p>
 
-    <button type="submit">
-        Login
-    </button>
-</form>
+    <h1>Login to CertQuest</h1>
 
-</body>
-</html>
+    <p class="subtitle">
+        Continue your mission and build your certification skills.
+    </p>
+
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="primary-button">
+            Login
+        </button>
+    </form>
+</section>
+{% endblock %}

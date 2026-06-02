@@ -14,12 +14,18 @@
     <nav>
         <a href="/">Home</a>
         <a href="/dashboard/">Dashboard</a>
+        <a href="/flashcards/">Flashcards</a>
         <a href="/games/">Games</a>
         <a href="/choose-path/">Paths</a>
 
         {% if user.is_authenticated %}
-            <a href="/accounts/logout/">Logout</a>
-        {% else %}
+            <form method="post" action="/accounts/logout/" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="nav-link-button">
+                    Logout
+                </button>
+            </form>      
+            {% else %}
             <a href="/accounts/login/">Login</a>
         {% endif %}
     </nav>

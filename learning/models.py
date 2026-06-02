@@ -47,3 +47,37 @@ class Domain(models.Model):
 
     def __str__(self):
         return f"{self.certification_path.name} - {self.name}"
+    
+class Flashcard(models.Model):
+    """
+    Study flashcards used for review and spaced repetition.
+    """
+
+    certification_path = models.ForeignKey(
+        CertificationPath,
+        on_delete=models.CASCADE
+    )
+
+    domains = models.ManyToManyField(
+        Domain,
+        blank=True
+    )
+
+    front = models.TextField()
+
+    back = models.TextField()
+
+    difficulty = models.IntegerField(
+        default=1
+    )
+
+    xp_reward = models.IntegerField(
+        default=2
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.front[:50]
