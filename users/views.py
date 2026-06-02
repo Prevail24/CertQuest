@@ -4,8 +4,8 @@ from django.db import models
 
 from learning.models import CertificationPath, UserFlashcard
 from achievements.models import UserAchievement
-from learning.services import get_domain_progress
-
+from learning.services import get_domain_progress, get_weak_flashcard_domains
+from quests.models import BossBattle
 
 @login_required
 def dashboard(request):
@@ -51,6 +51,13 @@ def dashboard(request):
             (known_cards / cards_reviewed) * 100
         )
 
+    weak_flashcard_domains = get_weak_flashcard_domains(request.user)
+
+    available_boss_battles = BossBattle.objects.filter(
+        certification_path=profile.selected_path,
+        is_active=True
+    )
+
     context = {
         "profile": profile,
         "xp_needed": xp_needed,
@@ -61,6 +68,8 @@ def dashboard(request):
         "known_cards": known_cards,
         "practice_cards": practice_cards,
         "mastery_percent": mastery_percent,
+        "weak_flashcard_domains": weak_flashcard_domains,
+        "available_boss_battles": available_boss_battles,
     }
 
     return render(request, "dashboard.html", context)

@@ -64,6 +64,51 @@
         </div>
     </div>
 
+    <div class="card quest-card boss-alert-card">
+        <p class="eyebrow">Command Center Alert</p>
+
+        <h2>
+            <span class="boss-pulse">👑</span>
+            Boss Battle Unlocked
+        </h2>
+
+        {% for boss in available_boss_battles %}
+            <h3>{{ boss.domain.name }}</h3>
+
+            <p class="subtitle">
+                A new mission has been unlocked. Review the briefing and prepare for deployment.
+            </p>
+
+            <p>
+                <strong>Reward:</strong> {{ boss.xp_reward }} XP
+            </p>
+
+            <a href="/boss-battles/{{ boss.id }}/" class="primary-button">
+                View Mission Briefing
+            </a>
+        {% empty %}
+            <p>No boss battles available yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="card quest-card">
+        <h2>Weak Flashcard Domains</h2>
+
+        {% if weak_flashcard_domains %}
+            <ul>
+                {% for domain in weak_flashcard_domains %}
+                    <li>
+                        <strong>{{ domain.domain.name }}</strong>
+                        <p>Correct: {{ domain.correct }}</p>
+                        <p>Incorrect: {{ domain.incorrect }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No weak flashcard domains found.</p>
+        {% endif %}
+    </div>
+
     <div class="card quest-card">
         <h2>Daily Quest</h2>
         <p>Complete today’s cyber mission to earn XP and build your streak.</p>
@@ -111,10 +156,7 @@
                     <p class="subtitle">👑 Boss Battle Available</p>
                 {% endif %}
                 
-                
                 <p class="subtitle">{{ item.status }}</p>
-
-                
                 
                 <p>
                     {{ item.correct_answers }}
@@ -131,13 +173,9 @@
                 </div>
 
                 <small>{{ item.percent }}%</small>
-
             </div>
-
         {% endfor %}
-
     {% else %}
-
         <p>
             Select a certification path and answer questions
             to begin tracking progress.

@@ -4,7 +4,7 @@ learning/services.py
 Calculates learning progress across certification domains.
 """
 
-from learning.models import Domain
+from learning.models import Domain, UserFlashcard
 from quests.models import UserAnswer
 
 
@@ -55,3 +55,42 @@ def get_domain_progress(user):
         })
 
     return progress_data
+
+def get_weak_flashcard_domains(user):
+    """
+    Finds domains where the user has more incorrect flashcard reviews
+    than correct reviews.
+    """
+
+    selected_path = user.profile.selected_path
+
+    if not selected_path:
+        return []
+
+    weak_domains = []
+
+    domains = Domain.objects.filter(
+        certification_path=selected_path
+    )
+
+    for domain in domains:
+        user_flashcards = UserFlashcard.objects.filter(
+            user=user,
+            flashcard__domains=domain
+        ).distinct()
+
+        total_correct = 0
+        total_incorrect = 0
+
+        for user_flashcard in user_flashcards:
+            total_correct += user_flashcard.times_correct
+            total_incorrect += user_flashcard.times_incorrect
+
+        if total_incorrect > total_correct:
+            weak_domains.append({
+                "domain": domain,
+                "correct": total_correct,
+                "incorrect": total_incorrect,
+            })
+
+    return weak_domains

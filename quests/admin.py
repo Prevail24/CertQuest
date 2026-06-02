@@ -7,7 +7,7 @@ Registers quest-related models.
 from django.contrib import admin
 
 from .models import Quest, Question, UserAnswer
-from .models import Quest, Question, UserAnswer, Scenario, ScenarioStep, UserScenario
+from .models import Quest, Question, UserAnswer, Scenario, ScenarioStep, UserScenario,BossBattle 
 
 
 @admin.register(Question)
@@ -34,3 +34,4 @@ admin.site.register(UserAnswer)
 admin.site.register(Scenario)
 admin.site.register(ScenarioStep)
 admin.site.register(UserScenario)
+admin.site.register(BossBattle)

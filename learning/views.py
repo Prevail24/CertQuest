@@ -1,8 +1,10 @@
+
+from random import choice
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from random import choice
 from django.db import models
-
+from django.utils import timezone
 from .models import Flashcard, UserFlashcard
 
 

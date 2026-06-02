@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from random import choice
 from progression.services import add_xp
-from .models import Question, Scenario, ScenarioStep, UserScenario
+from .models import Question, Scenario, ScenarioStep, UserScenario, BossBattle
 from .services import submit_answer
 
 
@@ -159,5 +159,21 @@ def scenario_step(request, scenario_id):
             "result": result,
             "current_step_number": current_index + 1,
             "total_steps": len(steps),
+        }
+    )
+
+@login_required
+def boss_battle_detail(request, boss_id):
+
+    boss_battle = get_object_or_404(
+        BossBattle,
+        id=boss_id
+    )
+
+    return render(
+        request,
+        "quests/boss_battle_detail.html",
+        {
+            "boss_battle": boss_battle,
         }
     )

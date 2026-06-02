@@ -30,6 +30,33 @@ body {
     color: #f4f7fb;
 }
 
+.boss-alert-card {
+    border: 1px solid #facc15;
+    box-shadow: 0 0 24px rgba(250, 204, 21, 0.18);
+}
+
+.boss-pulse {
+    display: inline-block;
+    animation: bossPulse 1.4s infinite;
+}
+
+@keyframes bossPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.18);
+        opacity: 0.65;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;

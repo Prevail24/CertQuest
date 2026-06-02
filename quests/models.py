@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from learning.models import CertificationPath, Domain
+from learning.models import CertificationPath, Domain 
 
 
 class Quest(models.Model):
@@ -142,19 +142,29 @@ class BossBattle(models.Model):
 
     title = models.CharField(max_length=255)
 
-    domain = models.ForeignKey(
-        Domain,
-        on_delete=models.CASCADE
-    )
-
     certification_path = models.ForeignKey(
         CertificationPath,
         on_delete=models.CASCADE
     )
-
-    xp_reward = models.IntegerField(default=250)
-
-    is_active = models.BooleanField(default=True)
+    domain = models.ForeignKey(
+        Domain,
+        on_delete=models.CASCADE
+    )
+    description = models.CharField(
+    max_length=255,
+    blank=True,
+    default=""
+    )
+    briefing = models.TextField(
+        blank=True,
+        default=""
+    )
+    xp_reward = models.IntegerField(
+        default=100
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
 
     def __str__(self):
-        return self.title  
+        return self.title 

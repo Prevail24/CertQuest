@@ -40,6 +40,13 @@ The goal of CertQuest is to make certification studying more engaging through RP
 - XP rewards
 - Automatic container cleanup
 - Possible future premium feature
+- CySA+ threat hunting
+- PenTest+ exploitation labs
+- Scenario-based missions
+- Boss battle integration
+- XP rewards
+- Achievement rewards
+- Automatic cleanup
 
 ## Bug / Needs Review
 

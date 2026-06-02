@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ boss_battle.title }}
+{% endblock %}
+
+{% block content %}
+
+<section class="card">
+
+    <p class="eyebrow">
+        👑 Boss Battle
+    </p>
+
+    <h1>
+        {{ boss_battle.title }}
+    </h1>
+
+    <p class="subtitle">
+        {{ boss_battle.description }}
+    </p>
+
+    <hr>
+
+    <h2>Mission Briefing</h2>
+
+    <p>
+        {{ boss_battle.briefing }}
+    </p>
+
+    <hr>
+
+    <p>
+        <strong>Reward:</strong>
+        {{ boss_battle.xp_reward }} XP
+    </p>
+
+    <p>
+        <strong>Passing Score:</strong>
+        80%
+    </p>
+
+    <a href="#"
+       class="primary-button">
+        Start Boss Battle
+    </a>
+</section>
+
+{% endblock %}
