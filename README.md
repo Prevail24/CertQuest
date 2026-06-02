@@ -28,7 +28,18 @@ The goal of CertQuest is to make certification studying more engaging through RP
 
 ## Current Status ##
 
-# CertQuest TODO
+# CertQuest !!!!!!!! TODO !!!!!!!!!
+
+## Future Feature: Docker Sandbox Labs
+
+- Temporary isolated Docker containers
+- Linux command practice
+- Security+ investigation labs
+- Networking exercises
+- Scenario-based missions
+- XP rewards
+- Automatic container cleanup
+- Possible future premium feature
 
 ## Bug / Needs Review
 
