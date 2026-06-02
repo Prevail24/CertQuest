@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from random import choice
+from django.db import models
 
 from .models import Flashcard, UserFlashcard
 
@@ -63,7 +64,26 @@ def flashcard_study(request):
             "learning/no_flashcards.html"
         )
 
-    flashcard = choice(flashcards)
+    need_practice_ids = UserFlashcard.objects.filter(
+        user=request.user,
+        times_incorrect__gte=models.F("times_correct")
+    ).values_list(
+        "flashcard_id",
+        flat=True
+    )
+
+    priority_cards = list(
+        Flashcard.objects.filter(
+            id__in=need_practice_ids,
+            certification_path=profile.selected_path,
+            is_active=True
+        )
+    )
+
+    if priority_cards:
+        flashcard = choice(priority_cards)
+    else:
+        flashcard = choice(flashcards)
 
     return render(
         request,
