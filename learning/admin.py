@@ -6,10 +6,11 @@ through the Django admin panel.
 """
 
 from django.contrib import admin
-from .models import CertificationPath, Domain, Flashcard
+from .models import CertificationPath, Domain, Flashcard, UserFlashcard
 
 admin.site.register(Domain)
 admin.site.register(CertificationPath)
+admin.site.register(UserFlashcard)
 @admin.register(Flashcard)
 class FlashcardAdmin(admin.ModelAdmin):
 

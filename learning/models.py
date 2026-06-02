@@ -1,10 +1,5 @@
-"""
-learning/models.py
-
-Learning paths and certification tracks.
-"""
-
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class CertificationPath(models.Model):
@@ -81,3 +76,44 @@ class Flashcard(models.Model):
 
     def __str__(self):
         return self.front[:50]
+
+class UserFlashcard(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    flashcard = models.ForeignKey(
+        Flashcard,
+        on_delete=models.CASCADE
+    )
+
+    times_seen = models.IntegerField(
+        default=0
+    )
+
+    times_correct = models.IntegerField(
+        default=0
+    )
+
+    times_incorrect = models.IntegerField(
+        default=0
+    )
+
+    last_reviewed = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        unique_together = (
+            "user",
+            "flashcard",
+        )
+
+    def __str__(self):
+        return (
+            f"{self.user.username} - "
+            f"{self.flashcard.front[:30]}"
+        )

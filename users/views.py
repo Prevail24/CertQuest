@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from learning.models import CertificationPath
+from django.db import models
+
+from learning.models import CertificationPath, UserFlashcard
 from achievements.models import UserAchievement
 from learning.services import get_domain_progress
 
@@ -13,6 +15,8 @@ def dashboard(request):
     - XP progress
     - streak
     - unlocked achievements
+    - domain progress
+    - flashcard mastery
     """
 
     profile = request.user.profile
@@ -26,15 +30,41 @@ def dashboard(request):
 
     domain_progress = get_domain_progress(request.user)
 
+    user_flashcards = UserFlashcard.objects.filter(
+        user=request.user
+    )
+
+    cards_reviewed = user_flashcards.count()
+
+    known_cards = user_flashcards.filter(
+        times_correct__gt=models.F("times_incorrect")
+    ).count()
+
+    practice_cards = user_flashcards.filter(
+        times_incorrect__gte=models.F("times_correct")
+    ).count()
+
+    mastery_percent = 0
+
+    if cards_reviewed > 0:
+        mastery_percent = int(
+            (known_cards / cards_reviewed) * 100
+        )
+
     context = {
         "profile": profile,
         "xp_needed": xp_needed,
         "xp_percent": xp_percent,
         "user_achievements": user_achievements,
         "domain_progress": domain_progress,
+        "cards_reviewed": cards_reviewed,
+        "known_cards": known_cards,
+        "practice_cards": practice_cards,
+        "mastery_percent": mastery_percent,
     }
 
     return render(request, "dashboard.html", context)
+
 
 @login_required
 def choose_path(request):

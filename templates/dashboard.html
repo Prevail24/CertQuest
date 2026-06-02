@@ -48,6 +48,22 @@
         <p class="stat-number">{{ profile.streak }} 🔥</p>
     </div>
 
+    <div class="card stat-card">
+        <h2>📚 Flashcard Mastery</h2>
+
+        <p>Reviewed: {{ cards_reviewed }}</p>
+        <p>✓ Known: {{ known_cards }}</p>
+        <p>📚 Need Practice: {{ practice_cards }}</p>
+
+        <p>
+            <strong>Mastery: {{ mastery_percent }}%</strong>
+        </p>
+
+        <div class="xp-bar">
+            <div class="xp-fill" style="width: {{ mastery_percent }}%;"></div>
+        </div>
+    </div>
+
     <div class="card quest-card">
         <h2>Daily Quest</h2>
         <p>Complete today’s cyber mission to earn XP and build your streak.</p>

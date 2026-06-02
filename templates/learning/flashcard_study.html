@@ -3,27 +3,59 @@
 {% block title %}CertQuest | Flashcards{% endblock %}
 
 {% block content %}
+
 <section class="card">
+
     <p class="eyebrow">Flashcard Review</p>
 
-    <h1>{{ flashcard.certification_path.icon }} {{ flashcard.certification_path.name }}</h1>
+    <h1>{{ flashcard.certification_path.name }}</h1>
+
+    <p class="subtitle">
+        {% for domain in flashcard.domains.all %}
+            {{ domain.name }}{% if not forloop.last %} • {% endif %}
+        {% endfor %}
+    </p>
 
     <h2>{{ flashcard.front }}</h2>
 
     <details>
-        <summary class="primary-button">Reveal Answer</summary>
+        <summary class="primary-button">
+            Reveal Answer
+        </summary>
 
-        <p style="margin-top: 20px;">
+        <p style="margin-top:20px;">
             {{ flashcard.back }}
         </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="flashcard_id"
+                value="{{ flashcard.id }}"
+            >
+
+            <button
+                type="submit"
+                name="action"
+                value="correct"
+                class="primary-button"
+            >
+                ✓ I Knew This
+            </button>
+
+            <button
+                type="submit"
+                name="action"
+                value="incorrect"
+                class="secondary-button"
+            >
+                📚 Need Practice
+            </button>
+        </form>
     </details>
 
-    <p class="subtitle">
-        XP Reward: {{ flashcard.xp_reward }}
-    </p>
-
-    <a href="/flashcards/" class="secondary-button">
-        Next Card
-    </a>
 </section>
+
 {% endblock %}
