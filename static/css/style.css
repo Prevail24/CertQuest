@@ -5,6 +5,28 @@ body {
     color: #f4f7fb;
 }
 
+.answer-form {
+    display: grid;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.answer-button {
+    background: #0b1020;
+    color: #f4f7fb;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+}
+
+.answer-button:hover {
+    border-color: #38f2af;
+    color: #38f2af;
+}
+
 .auth-form {
     margin-top: 24px;
     text-align: left;

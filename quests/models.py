@@ -166,5 +166,13 @@ class BossBattle(models.Model):
         default=True
     )
 
+    questions_required = models.IntegerField(
+    default=20
+    )
+
+    passing_score = models.IntegerField(
+        default=80
+    )
+
     def __str__(self):
         return self.title 

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Boss Battle Complete{% endblock %}
+
+{% block content %}
+<section class="card">
+
+    <p class="eyebrow">Boss Battle Complete</p>
+
+    {% if passed %}
+        <h1>👑 Boss Defeated</h1>
+        <p class="subtitle">Excellent work. You passed the challenge.</p>
+    {% else %}
+        <h1>⚠ Boss Battle Failed</h1>
+        <p class="subtitle">Study your weak areas and try again.</p>
+    {% endif %}
+
+    <h2>{{ boss_battle.title }}</h2>
+
+    <p>
+        Score: {{ score }} / {{ total_questions }}
+    </p>
+
+    <p>
+        Percent: {{ percent }}%
+    </p>
+
+    <p>
+        Passing Score: {{ boss_battle.passing_score }}%
+    </p>
+
+    <a href="/dashboard/" class="primary-button">
+        Return to Dashboard
+    </a>
+
+</section>
+{% endblock %}

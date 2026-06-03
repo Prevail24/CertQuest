@@ -1,11 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from random import choice
+from random import choice, sample
 from progression.services import add_xp
-from .models import Question, Scenario, ScenarioStep, UserScenario, BossBattle
+from .models import Question, Scenario, ScenarioStep, UserScenario, BossBattle, Question
 from .services import submit_answer
-
 
 @login_required
 def daily_quiz(request):
@@ -175,5 +174,153 @@ def boss_battle_detail(request, boss_id):
         "quests/boss_battle_detail.html",
         {
             "boss_battle": boss_battle,
+        }
+    )
+
+@login_required
+def boss_battle_start(request, boss_id):
+
+    boss_battle = get_object_or_404(
+        BossBattle,
+        id=boss_id
+    )
+
+    questions = list(
+        Question.objects.filter(
+            domains=boss_battle.domain
+        ).distinct()
+    )
+
+    if len(questions) < boss_battle.questions_required:
+        selected_questions = questions
+    else:
+        selected_questions = sample(
+            questions,
+            boss_battle.questions_required
+        )
+
+    request.session[
+        f"boss_battle_{boss_id}_questions"
+    ] = [q.id for q in selected_questions]
+
+    request.session[
+        f"boss_battle_{boss_id}_index"
+    ] = 0
+
+    request.session[
+        f"boss_battle_{boss_id}_score"
+    ] = 0
+
+    request.session.modified = True
+
+    return redirect(
+        "boss_battle_question",
+        boss_id=boss_id
+    )
+
+@login_required
+def boss_battle_question(request, boss_id):
+
+    boss_battle = get_object_or_404(
+        BossBattle,
+        id=boss_id
+    )
+
+    question_ids = request.session.get(
+        f"boss_battle_{boss_id}_questions",
+        []
+    )
+
+    current_index = request.session.get(
+        f"boss_battle_{boss_id}_index",
+        0
+    )
+
+    if current_index >= len(question_ids):
+        return redirect(
+            "boss_battle_complete",
+            boss_id=boss_id
+        )
+
+    question = Question.objects.get(
+        id=question_ids[current_index]
+    )
+
+    if request.method == "POST":
+
+        selected_answer = request.POST.get(
+            "answer"
+        )
+
+        correct_answer = question.correct_answer
+
+        if selected_answer == correct_answer:
+
+            score = request.session.get(
+                f"boss_battle_{boss_id}_score",
+                0
+            )
+
+            request.session[
+                f"boss_battle_{boss_id}_score"
+            ] = score + 1
+
+        request.session[
+            f"boss_battle_{boss_id}_index"
+        ] = current_index + 1
+
+        request.session.modified = True
+
+        return redirect(
+            "boss_battle_question",
+            boss_id=boss_id
+        )
+
+    return render(
+        request,
+        "quests/boss_battle_question.html",
+        {
+            "boss_battle": boss_battle,
+            "question": question,
+            "current_question": current_index + 1,
+            "total_questions": len(question_ids),
+        }
+    )
+
+@login_required
+def boss_battle_complete(request, boss_id):
+    boss_battle = get_object_or_404(
+        BossBattle,
+        id=boss_id
+    )
+
+    question_ids = request.session.get(
+        f"boss_battle_{boss_id}_questions",
+        []
+    )
+
+    score = request.session.get(
+        f"boss_battle_{boss_id}_score",
+        0
+    )
+
+    total_questions = len(question_ids)
+
+    percent = 0
+
+    if total_questions > 0:
+        percent = int((score / total_questions) * 100)
+
+    passed = percent >= boss_battle.passing_score
+
+    return render(
+        request,
+        "quests/boss_battle_complete.html",
+        {
+            "boss_battle": boss_battle,
+            "score": score,
+            "total_questions": total_questions,
+            "percent": percent,
+            "passed": passed,
         }
     )

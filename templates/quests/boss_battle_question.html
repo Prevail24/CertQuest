@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Boss Battle
+{% endblock %}
+
+{% block content %}
+
+<section class="card">
+
+    <p class="eyebrow">
+        👑 Boss Battle
+    </p>
+
+    <h1>
+        {{ boss_battle.title }}
+    </h1>
+
+    <p>
+        Question {{ current_question }}
+        of
+        {{ total_questions }}
+    </p>
+
+    <hr>
+
+    <h2>
+        {{ question.text }}    
+    </h2>
+
+    <form method="post" class="answer-form">
+
+    {% csrf_token %}
+
+    <button type="submit" name="answer" value="A" class="answer-button">
+
+        A. {{ question.option_a }}
+
+    </button>
+
+    <button type="submit" name="answer" value="B" class="answer-button">
+
+        B. {{ question.option_b }}
+
+    </button>
+
+    <button type="submit" name="answer" value="C" class="answer-button">
+
+        C. {{ question.option_c }}
+
+    </button>
+
+    <button type="submit" name="answer" value="D" class="answer-button">
+
+        D. {{ question.option_d }}
+
+    </button>
+
+</form> df
+
+</section>
+
+{% endblock %}
