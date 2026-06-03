@@ -312,6 +312,12 @@ def boss_battle_complete(request, boss_id):
         percent = int((score / total_questions) * 100)
 
     passed = percent >= boss_battle.passing_score
+    
+    xp_gained = 0
+
+    if passed:
+        add_xp(request.user, boss_battle.xp_reward)
+        xp_gained = boss_battle.xp_reward
 
     return render(
         request,
@@ -322,5 +328,6 @@ def boss_battle_complete(request, boss_id):
             "total_questions": total_questions,
             "percent": percent,
             "passed": passed,
+            "xp_gained": xp_gained,
         }
     )

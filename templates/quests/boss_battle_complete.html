@@ -28,7 +28,17 @@
     <p>
         Passing Score: {{ boss_battle.passing_score }}%
     </p>
-
+    
+    {% if xp_gained > 0 %}
+        <p>
+            <strong>XP Earned:</strong>
+            {{ xp_gained }}
+        </p>
+    {% else %}
+        <p class="subtitle">
+            No XP awarded. Pass the boss battle to earn the reward.
+        </p>
+    {% endif %}
     <a href="/dashboard/" class="primary-button">
         Return to Dashboard
     </a>
